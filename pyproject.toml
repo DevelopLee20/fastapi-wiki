@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 fastapi = "^0.115.4"
 mypy = "^1.13.0"
+uvicorn = "^0.32.0"
 
 
 [tool.poetry.group.dev.dependencies]
