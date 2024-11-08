@@ -1,0 +1,33 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup SSH
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        HOST: ${{ secrets.SERVER_HOST }}
+        USER: ${{ secrets.SERVER_USER }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
+
+    - name: Pull latest code on server
+      env:
+        HOST: ${{ secrets.SERVER_HOST }}
+        USER: ${{ secrets.SERVER_HOST }}
+      run: |
+        ssh -i ~/.ssh/id_rsa "$SERVER_HOST@$SERVER_HOST" 'cd /path/to/your/repo && git pull origin $(git rev-parse --abbrev-ref HEAD)'
