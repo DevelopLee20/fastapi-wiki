@@ -28,6 +28,6 @@ jobs:
     - name: Pull latest code on server
       env:
         HOST: ${{ secrets.SERVER_HOST }}
-        USER: ${{ secrets.SERVER_HOST }}
+        USER: ${{ secrets.SERVER_USER }}
       run: |
         ssh -i ~/.ssh/id_rsa "$USER@$HOST" 'cd /path/to/your/repo && git pull origin $(git rev-parse --abbrev-ref HEAD)'
