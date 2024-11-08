@@ -8,6 +8,7 @@ repos:
     rev: v1.13.0  # 최신 버전 사용 권장
     hooks:
       - id: mypy
+        args: ["--explicit-package-bases"]
 
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.10.0
