@@ -3,12 +3,13 @@ repos:
     rev: 24.8.0  # 최신 버전 사용 권장
     hooks:
       - id: black
+        args: ["--line-length=88"]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.13.0  # 최신 버전 사용 권장
     hooks:
       - id: mypy
-        args: ["--explicit-package-bases", "--ignore-missing-imports"]
+        types: [python]
 
 
   - repo: https://github.com/pre-commit/pygrep-hooks
@@ -21,7 +22,7 @@ repos:
     rev: v3.19.0
     hooks:
       - id: pyupgrade
-        args: ['--py37-plus']
+        args: ['--py39-plus']
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0  # 최신 버전 사용 권장
@@ -34,3 +35,10 @@ repos:
     hooks:
       - id: autoflake
         args: ['--remove-all-unused-imports', '--ignore-init-module-imports']
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.4
+    hooks:
+      - id: ruff
+        types: [python]
+        args: ["--fix"]
